@@ -15,5 +15,5 @@ public interface AuthDao {
     int queryByCondition(User user);
 
 
-
+    User queryByUserName(String userName);
 }

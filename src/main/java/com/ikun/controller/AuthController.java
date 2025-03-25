@@ -26,10 +26,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public Result<Boolean> login(@RequestBody User user){
-        //调用service中的服务
-        //查询设计：现将传过来的password进行加密然后设置这个user对象的password字段为这个加密后的字段
-        //然后设置一个接口，这个接口可以接受所有的条件
-        //调用这个接口，如果获取不到说明为空，校验失败
+        /**
+         * 登录校验设计：根据传过来的user的userName去查询数据库，得到username对应的user对象。
+         * 使用PasswordEncrypt.matches方法，将传过来的密码与从数据库获取到的密码进行对比。
+         */
         boolean result = authService.queryByCondition(user);
         if(result){
             return Result.ok("登录成功");

@@ -23,11 +23,12 @@ public class AuthServiceImpl implements AuthService {
     AuthDao authDao;
     @Override
     public boolean queryByCondition(User user) {
-        //将password进行加密处理
-        String encryptedPassword = PasswordEncrypt.passwordEncypt(user.getPassword());
-        user.setPassword(encryptedPassword);
-        //去数据库中比对
-        int count = authDao.queryByCondition(user);
-        return count>0;
+        //根据用户名去数据库查询对应的user对象
+        String userName = user.getUserName();
+        User dbUser = authDao.queryByUserName(userName);
+        if(dbUser ==null || !PasswordEncrypt.matches(user.getPassword(),dbUser.getPassword())){
+            return false;
+        }
+        return true;
     }
 }

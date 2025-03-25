@@ -31,8 +31,13 @@
             </if>
         </where>
     </select>
+    <select id="queryByUserName" parameterType="string" resultType="com.ikun.entity.User">
+        select *
+        from user
+        where username = #{userName}
+    </select>
 
-<!--    &lt;!&ndash;统计总行数&ndash;&gt;-->
+    <!--    &lt;!&ndash;统计总行数&ndash;&gt;-->
 <!--    <select id="count" resultType="java.lang.Long">-->
 <!--        select count(1)-->
 <!--        from subject_brief-->
